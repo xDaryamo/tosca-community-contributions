@@ -8,7 +8,7 @@ tosca_definitions_version: tosca_2_0
 metadata:
   template_name: data_types.yaml
   template_author: Oasis Open
-  template_version: 2.0
+  template_version: "2.0"
 
 description: >
   TOSCA Simple Profile data type definitions
@@ -137,8 +137,10 @@ data_types:
     description: >-
       The PortDef type defines a network port.
     derived_from: integer
-    constraints:
-      - in_range: [ 1, 65535 ]
+    validation:
+      $in_range: 
+        - $value
+        - [ 1, 65535 ]
 
   PortSpec:
     description: >-
@@ -151,8 +153,10 @@ data_types:
         type: string
         required: true
         default: tcp
-        constraints:
-          - valid_values: [ udp, tcp, igmp ]
+        validation:
+          $valid_values: 
+            - $value
+            - [ udp, tcp, igmp ]
       target:
         description: >-
           The optional target port.
@@ -163,8 +167,10 @@ data_types:
           The optional range for target port.
         type: range
         required: false
-        constraints:
-          - in_range: [ 1, 65535 ]
+        validation:
+          $in_range: 
+            - $value
+            - [ 1, 65535 ]
       source:
         description: >-
           The optional source port.
@@ -175,5 +181,7 @@ data_types:
           The optional range for source port.
         type: range
         required: false
-        constraints:
-          - in_range: [ 1, 65535 ]
+        validation:
+          $in_range: 
+            - $value
+            - [ 1, 65535 ]

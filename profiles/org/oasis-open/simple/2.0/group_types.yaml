@@ -10,7 +10,7 @@ description: >
 metadata:
   template_name: group_types.yaml
   template_author: Oasis Open
-  template_version: 2.0
+  template_version: "2.0"
 
 imports:
   - node_types.yaml

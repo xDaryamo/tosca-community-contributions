@@ -11,7 +11,7 @@ description: >
 metadata:
   template_name: relationship_types.yaml
   template_author: Oasis Open
-  template_version: 2.0
+  template_version: "2.0"
 
 imports:
   - data_types.yaml
@@ -69,8 +69,10 @@ relationship_types:
           The relative location (e.g., mount point on the file system)
           that provides the root location to address the attached node.
         type: string
-        constraints:
-          - min_length: 1
+        validation:
+          $min_length: 
+            - $value
+            - 1
       device:
         description: >-
           The logical device name for the attached device.

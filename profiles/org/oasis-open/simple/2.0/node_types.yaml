@@ -8,7 +8,7 @@ tosca_definitions_version: tosca_2_0
 metadata:
   template_name: node_types.yaml
   template_author: Oasis Open
-  template_version: 2.0
+  template_version: "2.0"
 
 description: >
   TOSCA Simple Profile Version node type definitions
@@ -36,7 +36,7 @@ node_types:
           capability: Node
           node: Root
           relationship: DependsOn
-          occurrences: [ 0, UNBOUNDED ]
+          count_range: [ 0, UNBOUNDED ]
     interfaces:
       Standard:
         type: Lifecycle.Standard
@@ -91,7 +91,7 @@ node_types:
           capability: Attachment
           node: Storage.BlockStorage
           relationship: AttachesTo
-          occurrences: [0, UNBOUNDED]
+          count_range: [0, UNBOUNDED]
     capabilities:
       host:
         type: Compute
@@ -126,7 +126,7 @@ node_types:
           capability: Compute
           node: Compute
           relationship: HostedOn
-          occurrences: [ 0, 1 ]
+          count_range: [ 0, 1 ]
 
   WebServer:
     description: >-
@@ -230,8 +230,10 @@ node_types:
     properties:
       size:
         type: scalar-unit.size
-        constraints:
-          - greater_or_equal: 0 MB
+        validation:
+          $greater_or_equal:
+            - $value
+            - 0 MB
 
   Storage.ObjectStorage:
     description: >
@@ -248,8 +250,10 @@ node_types:
         description: >
           The requested maximum storage size.
         type: scalar-unit.size
-        constraints:
-          - greater_or_equal: 0 GB
+        validation:
+          $greater_or_equal:
+            - $value
+            - 0 GB
     capabilities:
       storage_endpoint:
         type: Endpoint
@@ -266,8 +270,10 @@ node_types:
           The requested storage size. Required when an existing
           volume_id is not provided. If volume_id is provided, size is
           ignored.
-        constraints:
-          - greater_or_equal: 1 MB
+        validation:
+          $greater_or_equal:
+            - $value
+            - 1 MB
       volume_id:
         description: >-
           ID of an existing volume (that is in the accessible scope of
@@ -320,8 +326,10 @@ node_types:
         type: integer
         required: false
         default: 4
-        constraints:
-          - valid_values: [ 4, 6 ]
+        validation:
+          $valid_values:
+            - $value
+            - [ 4, 6 ]
       cidr:
         description: >
           The cidr block of the requested
@@ -413,8 +421,10 @@ node_types:
         type: integer
         required: true
         default: 0
-        constraints:
-          - greater_or_equal: 0
+        validation:
+          $greater_or_equal:
+            - $value
+            - 0
       is_default:
         description: >
           If is_default=true this port will be used for the default gateway
@@ -465,13 +475,12 @@ node_types:
     capabilities:
       client:
         type: Endpoint.Public
-        occurrences: [0, UNBOUNDED]
         description: >
           The floating IP to which clients on the public network can connect.
     requirements:
       - application:
           capability: Endpoint
           relationship: RoutesTo
-          occurrences: [0, UNBOUNDED]
+          count_range: [0, UNBOUNDED]
           description: >
             Connection to one or more load balanced applications.

@@ -8,7 +8,7 @@ tosca_definitions_version: tosca_2_0
 metadata:
   template_name: capability_types.yaml
   template_author: Oasis Open
-  template_version: 2.0
+  template_version: "2.0"
 
 imports:
   - data_types.yaml
@@ -43,33 +43,41 @@ capability_types:
           Compute node.
         type: integer
         required: false
-        constraints:
-          - greater_or_equal: 1
+        validation:
+          $greater_or_equal: 
+            - $value
+            - 1
       cpu_frequency:
         description: >-
           Specifies the operating frequency of CPU's core.  This
           property expresses the expected frequency of one (1) CPU as
-          provided by the property “num_cpus”.
+          provided by the property "num_cpus".
         type: scalar-unit.frequency
         required: false
-        constraints:
-          - greater_or_equal: '0.1 GHz'
+        validation:
+          $greater_or_equal: 
+            - $value
+            - '0.1 GHz'
       disk_size:
         description: >-
           Size of the local disk available to applications running on
           the Compute node.
         type: scalar-unit.size
         required: false
-        constraints:
-          - greater_or_equal: 0 MB
+        validation:
+          $greater_or_equal: 
+            - $value
+            - 0 MB
       mem_size:
         description: >-
           Size of memory available to applications running on the
           Compute node.
         type: scalar-unit.size
         required: false
-        constraints:
-          - greater_or_equal: 0 MB
+        validation:
+          $greater_or_equal: 
+            - $value
+            - 0 MB
 
   Endpoint:
     description: >-
@@ -117,15 +125,17 @@ capability_types:
           The optional indicator of the direction of the connection.
         type: string
         default: source
-        constraints:
-          - valid_values: [ source, target, peer ]
+        validation:
+          $valid_values: [ source, target, peer ]
       ports:
         description: >-
           The optional map of ports the Endpoint supports (if more than one).
         type: map
         required: false
-        constraints:
-          - min_length: 1
+        validation:
+          $min_length: 
+            - $value
+            - 1
         entry_schema:
           type: PortSpec
     attributes:
@@ -144,7 +154,9 @@ capability_types:
     properties:
       # Change network_name to use the default public network for the node
       # this capability will be declared in.
-      network_name: PUBLIC
+      network_name: 
+        type: string
+        default: PUBLIC
       floating:
         description: >
           Indicates that the public address should be allocated from
@@ -166,7 +178,9 @@ capability_types:
     derived_from: Endpoint
     # Change Endpoint secure indicator to true from its default of false
     properties:
-      secure: true
+      secure:
+        type: boolean
+        default: true
 
   Endpoint.Database:
     description: >-

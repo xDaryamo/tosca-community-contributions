@@ -9,7 +9,7 @@ profile: org.oasis-open.simple:2.0
 metadata:
   template_name: profile.yaml
   template_author: Oasis Open
-  template_version: 2.0
+  template_version: "2.0"
 
 description: TOSCA Simple Profile type definitions
 
