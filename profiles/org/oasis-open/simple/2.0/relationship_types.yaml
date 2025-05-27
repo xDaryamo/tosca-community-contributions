@@ -41,6 +41,8 @@ relationship_types:
       nodes.
     derived_from: Root
     valid_target_types: [ Container ]
+    metadata:
+      role: host
 
   ConnectsTo:
     description: >-
