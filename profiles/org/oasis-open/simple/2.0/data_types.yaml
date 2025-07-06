@@ -141,7 +141,77 @@ data_types:
       $in_range: 
         - $value
         - [ 1, 65535 ]
+  ##########################
+  # SCALAR TYPE EXTENSIONS #
+  ##########################
 
+  Size:
+    description: Scalar representing size values
+    derived_from: scalar
+    data_type: integer
+    units:
+      B: 1
+      kB: 1000
+      KB: 1000
+      KiB: 1024
+      MB: 1000000
+      MiB: 1048576
+      GB: 1000000000
+      GiB: 1073741824
+      TB: 1000000000000
+      TiB: 1099511627776
+    canonical_unit: B
+    validation:
+      $greater_or_equal: [ $value, 0 ]
+
+  Time:
+    description: Scalar representing durations
+    derived_from: scalar
+    data_type: float
+    units:
+      ns: 0.000000001
+      us: 0.000001
+      μs: 0.000001
+      ms: 0.001
+      s: 1
+      m: 60
+      h: 3600
+      d: 86400
+    canonical_unit: s
+    validation:
+      $greater_or_equal: [ $value, 0.0 ]
+
+  Frequency:
+    description: Scalar representing frequency values
+    derived_from: scalar
+    data_type: float
+    units:
+      Hz: 1
+      kHz: 1000
+      MHz: 1000000
+      GHz: 1000000000
+    canonical_unit: Hz
+    validation:
+      $greater_or_equal: [ $value, 0.0 ]
+
+  Bitrate:
+    description: Scalar representing bitrate values
+    derived_from: scalar
+    data_type: float
+    units:
+      bps: 1
+      Bps: 8
+      Kbps: 1000
+      KBps: 8000
+      Mbps: 1000000
+      MBps: 8000000
+      Kibps: 1024
+      KiBps: 8192
+      Mibps: 1048576
+      MiBps: 8388608
+    canonical_unit: bps
+    validation:
+      $greater_or_equal: [ $value, 0.0 ]
   PortSpec:
     description: >-
       The PortSpec type is used when describing port specifications
