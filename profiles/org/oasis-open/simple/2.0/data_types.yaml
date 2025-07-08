@@ -151,18 +151,30 @@ data_types:
     data_type: integer
     units:
       B: 1
+      b: 1               # Alias lowercase, optionally used
       kB: 1000
+      kb: 1000
       KB: 1000
       KiB: 1024
-      MB: 1000000
+      kib: 1024
       MiB: 1048576
-      GB: 1000000000
+      mib: 1048576
+      MB: 1000000
+      mb: 1000000
       GiB: 1073741824
-      TB: 1000000000000
+      gib: 1073741824
+      GB: 1000000000
+      gb: 1000000000
       TiB: 1099511627776
+      tib: 1099511627776
+      TB: 1000000000000
+      tb: 1000000000000
+      PiB: 1125899906842624
+      pib: 1125899906842624
     canonical_unit: B
     validation:
-      $greater_or_equal: [ $value, 0 ]
+      $greater_or_equal: [ $value, 0 B ]
+
 
   Time:
     description: Scalar representing durations
