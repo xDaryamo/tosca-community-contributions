@@ -133,9 +133,7 @@ capability_types:
         type: map
         required: false
         validation:
-          $min_length: 
-            - $value
-            - 1
+          $greater_or_equal: [ {$length: [ $value ] }, 1 ]
         entry_schema:
           type: PortSpec
     attributes:
