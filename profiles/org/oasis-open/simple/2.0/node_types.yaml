@@ -274,6 +274,7 @@ node_types:
           $greater_or_equal:
             - $value
             - 1 MB
+        required: false
       volume_id:
         description: >-
           ID of an existing volume (that is in the accessible scope of
