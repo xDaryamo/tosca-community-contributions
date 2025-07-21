@@ -234,6 +234,7 @@ node_types:
           $greater_or_equal:
             - $value
             - 0 MB
+        required: false
 
   Storage.ObjectStorage:
     description: >
@@ -254,6 +255,7 @@ node_types:
           $greater_or_equal:
             - $value
             - 0 GB
+        required: false
     capabilities:
       storage_endpoint:
         type: Endpoint
@@ -274,7 +276,6 @@ node_types:
           $greater_or_equal:
             - $value
             - 1 MB
-        required: false
       volume_id:
         description: >-
           ID of an existing volume (that is in the accessible scope of
